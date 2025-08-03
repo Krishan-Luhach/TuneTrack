@@ -8,8 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-interface AccountContentProps {}
-export const AccountContent: React.FC<AccountContentProps> = () => {
+export const AccountContent: React.FC = () => {
   const router = useRouter();
   const subscribeModal = useSubscribeModal();
   const { isLoading, subscription, user } = useUser();

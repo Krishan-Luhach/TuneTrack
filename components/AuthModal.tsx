@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import useAuthModal from "@/hooks/useAuthModal";
-import { UserContext, useUser } from "@/hooks/useUser";
+import { UserContext } from "@/hooks/useUser";
 import { createClient } from "@/utils/supabase/client";
 
 const AuthModal = () => {
-  const router = useRouter();
+
   const supabaseClient = createClient();
   const userContext = useContext(UserContext)
   const { isOpen, onClose } = useAuthModal();

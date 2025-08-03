@@ -5,8 +5,7 @@ import { useLoadSongUrl } from "@/hooks/useLoadSongUrl";
 import usePlayer from "@/hooks/usePlayer";
 import { PlayerContent } from "./PlayerContent";
 
-interface PlayerProps {}
-export const Player: React.FC<PlayerProps> = () => {
+export const Player: React.FC = () => {
   const player = usePlayer();
   const { song } = useGetSongById(player.activeId);
 

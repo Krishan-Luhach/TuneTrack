@@ -1,8 +1,5 @@
 import { FaPlay } from "react-icons/fa"
 
-interface PlayButtonProps{
-
-}
 const PlayButton = () => {
   return (
     <button className="

@@ -16,7 +16,7 @@ export async function POST(request: Request) {
       uuid: user?.id || "",
       email: user?.email || "",
     });
-    //@ts-ignore
+    //@ts-expect-error
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       billing_address_collection: 'auto',

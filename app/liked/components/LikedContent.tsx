@@ -2,7 +2,7 @@
 import { LikeButton } from "@/components/LikeButton";
 import MediaItem from "@/components/MediaItem";
 import { useOnPlay } from "@/hooks/useOnPlay";
-import { MyUserContextProvider, UserContext, useUser } from "@/hooks/useUser";
+import { UserContext } from "@/hooks/useUser";
 import { Song } from "@/types";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
