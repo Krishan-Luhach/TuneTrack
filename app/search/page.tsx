@@ -8,7 +8,7 @@ interface SearchProps {
   };
 }
 export const revalidate = 0;
-const Search = async ({ searchParams }: SearchProps) => {
+const Search:React.FC<SearchProps> = async ({ searchParams }) => {
   const { title } = await searchParams;
   const songs = await getSongsByTitle(title);
 
