@@ -28,7 +28,7 @@ export interface Product {
 }
 export interface Price {
   active?: boolean | null;
-  currency?: string | null;
+  currency?: string;
   description?: string | null;
   id: string;
   interval?: Stripe.Price.Recurring.Interval;
@@ -58,4 +58,8 @@ export interface Subscription {
   trial_start?: string | null;
   user_id: string;
   prices?: Price;
+}
+
+export interface ProductWithPrices extends Product{
+  prices? : Price[]
 }

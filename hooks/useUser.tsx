@@ -2,7 +2,6 @@ import { Subscription, UserDetails } from "@/types";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 type UserContextType = {
   user: User | null;
@@ -24,6 +23,7 @@ export const MyUserContextProvider = (props: Props) => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [user, setUser] = useState<User | null>(null);
+
   const getUserDetails = async () =>
     (await supabase.from("users").select("*").single()) ?? null;
   const getSubscription = async () =>
@@ -40,7 +40,7 @@ export const MyUserContextProvider = (props: Props) => {
         const results = await Promise.allSettled([
           getUserDetails(),
           getSubscription(),
-         supabase.auth.getUser()
+          supabase.auth.getUser(),
         ]);
         const userDetailsPromise = results[0];
         const subscriptionPromise = results[1];
@@ -49,18 +49,18 @@ export const MyUserContextProvider = (props: Props) => {
           setUserDetails(userDetailsPromise.value.data as UserDetails);
         }
         if (subscriptionPromise.status === "fulfilled") {
+          console.log("Subscription: ",subscriptionPromise.value.data)
           setSubscription(subscriptionPromise.value.data as Subscription);
         }
-        if(userResponse.status==='fulfilled'){
-          setUser(userResponse.value.data.user);
+        if (userResponse.status === "fulfilled") {
+          setUser(()=>userResponse.value.data.user);
         }
 
         const {
           data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
-          setUser(session?.user ?? null);
+        } =  supabase.auth.onAuthStateChange((_event, session) => {
+          setUser(()=>session?.user ?? null);
         });
-        console.log("User in useUser: ",user);
         setIsLoadingData(false);
 
         return () => subscription.unsubscribe();

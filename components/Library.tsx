@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import useAuthModal from "@/hooks/useAuthModal";
 import useUploadModal from "@/hooks/useUploadModal";
 import { useUser } from "@/hooks/useUser";
@@ -6,22 +6,25 @@ import { Song } from "@/types";
 import { AiOutlinePlus } from "react-icons/ai";
 import { TbPlaylist } from "react-icons/tb";
 import MediaItem from "./MediaItem";
+import { useOnPlay } from "@/hooks/useOnPlay";
+import useSubscribeModal from "@/hooks/useSubscribeModal";
 
-export const Library = ({songs}:{songs: Song[]}) => {
-  const {user} = useUser();
+export const Library = ({ songs }: { songs: Song[] }) => {
+  const { user ,subscription} = useUser();
   const authModal = useAuthModal();
+  const subscribeModal = useSubscribeModal(); 
   const uploadModal = useUploadModal();
-    const onClick = ()=>{
-      if(!user){
-        authModal.onOpen();
+  const onPlay = useOnPlay(songs);
+  const onClick = () => {
+    if (!user) {
+      authModal.onOpen();
+    } else {
+      if(!subscription){
+        return subscribeModal.onOpen();
       }
-      else{
-
-        //TODO:: check for subscription
-        uploadModal.onOpen();
-
-      }
+      uploadModal.onOpen();
     }
+  };
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between px-5 pt-4">
@@ -39,17 +42,22 @@ export const Library = ({songs}:{songs: Song[]}) => {
         </div>
 
         <AiOutlinePlus
-        size={20}
-        className="
+          size={20}
+          className="
         text-neutral-400
         cursor-pointer
         hover:text-white
         transition"
-        onClick={onClick} />
+          onClick={onClick}
+        />
       </div>
       <div className="flex flex-col gap-y-2 mt-4 px-10">
-        {songs.map((item)=>(
-          <MediaItem onClick = {()=>{}} key = {item.id} data={item}/>
+        {songs.map((item) => (
+          <MediaItem
+            onClick={(id: string) => onPlay(id)}
+            key={item.id}
+            data={item}
+          />
         ))}
       </div>
     </div>
