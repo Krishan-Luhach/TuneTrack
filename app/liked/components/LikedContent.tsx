@@ -13,7 +13,8 @@ interface LikedContentProps {
 export const LikedContent: React.FC<LikedContentProps> = ({ songs }) => {
   const router = useRouter();
   const onPlay = useOnPlay(songs);
-  const { isLoading, user }:any = useContext(UserContext);
+  //@ts-expect-error - This is intended in code
+  const { isLoading, user } = useContext(UserContext);
 
   useEffect(() => {
     if (!isLoading && !user) {
