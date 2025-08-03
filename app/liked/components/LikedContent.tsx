@@ -13,7 +13,7 @@ interface LikedContentProps {
 export const LikedContent: React.FC<LikedContentProps> = ({ songs }) => {
   const router = useRouter();
   const onPlay = useOnPlay(songs);
-  const { isLoading, user } = useContext(UserContext) as any;
+  const { isLoading, user }:any = useContext(UserContext);
 
   useEffect(() => {
     if (!isLoading && !user) {
