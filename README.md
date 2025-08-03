@@ -1,4 +1,4 @@
-Manage and listen to your favorite songs: Visit the app here: [TuneTrack](https://tune-track-9rl2o1wqp-krishanluhachs-projects.vercel.app/)
+Manage and listen to your favorite songs: Visit the app here: [TuneTrack](https://tune-track-theta.vercel.app/))
 
 ## Getting Started
 
